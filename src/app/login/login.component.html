@@ -1,0 +1,25 @@
+<div class="p-d-flex p-jc-center p-ai-center" style="height: 100vh;">
+  <div class="p-card p-shadow-3" style="width: 300px;">
+    <div class="p-card-header">
+      <h2>Login</h2>
+    </div>
+    <div class="p-card-body">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="p-field">
+          <label for="username">Username</label>
+          <input id="username" type="text" pInputText formControlName="username" />
+        </div>
+        <div class="p-field">
+          <label for="password">Password</label>
+          <input id="password" type="password" pInputText formControlName="password" />
+        </div>
+        <button pButton type="submit" label="Login" [disabled]="loginForm.invalid"></button>
+      </form>
+      <div class="login-details">
+        <div>User Name: ANY USERNAME</div>
+      <div>Password: Password123</div>
+      </div>
+    </div>
+  </div>
+ 
+</div>

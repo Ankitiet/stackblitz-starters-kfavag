@@ -1,0 +1,167 @@
+<div class="header">
+  <div>
+    <h2>Book Room Meeting</h2>
+  </div>
+  <div class="logout">
+    <div>
+      <span>
+        {{ loginUser }}
+      </span>
+    </div>
+    <button pButton type="button" label="Logout" (click)="onLogout()"></button>
+  </div>
+</div>
+<button
+  pButton
+  type="button"
+  label="Book Meeting"
+  icon="pi pi-plus"
+  (click)="openBookModal()"
+></button>
+<div>
+  <h2>Your Upcoming Meetings</h2>
+  <p-table [value]="myMeetings" class="p-mt-3">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Sr No</th>
+        <th>User Name</th>
+        <th>Agenda</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Room</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-meeting let-i="rowIndex">
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>{{ meeting.username }}</td>
+        <td>{{ meeting.agenda }}</td>
+        <td>{{ meeting.date }}</td>
+        <td>{{ meeting.startTime }} - {{ meeting.endTime }}</td>
+        <td>{{ meeting.room }}</td>
+        <td>
+          <button
+            pButton
+            type="button"
+            icon="pi pi-trash"
+            class="p-button-danger"
+            (click)="openDeleteModal(meeting)"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<div>
+  <h2>Rooms Meeting Details</h2>
+  <p-table [value]="meetings" class="p-mt-3">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Sr No</th>
+        <th>User Name</th>
+        <th>Agenda</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Room</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-meeting let-i="rowIndex">
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>{{ meeting.username }}</td>
+        <td>{{ meeting.agenda }}</td>
+        <td>{{ meeting.date }}</td>
+        <td>{{ meeting.startTime }} - {{ meeting.endTime }}</td>
+        <td>{{ meeting.room }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog
+  header="Book Meeting"
+  [(visible)]="displayBookModal"
+  [modal]="true"
+  [closable]="false"
+  [style]="{ width: '600px' }"
+>
+  <form [formGroup]="bookMeetingForm" (ngSubmit)="onBookMeeting()">
+    <div class="p-field">
+      <label for="username">Username</label>
+      <input id="username" type="text" pInputText formControlName="username" />
+    </div>
+    <div class="p-field">
+      <label for="agenda">Agenda</label>
+      <input id="agenda" type="text" pInputText formControlName="agenda" />
+    </div>
+    <div class="p-field">
+      <label for="date">Date</label>
+      <input id="date" type="date" pInputText formControlName="date" />
+    </div>
+    <div class="p-field">
+      <label for="startTime">Start Time</label>
+      <input
+        id="startTime"
+        type="time"
+        pInputText
+        formControlName="startTime"
+      />
+    </div>
+    <div class="p-field">
+      <label for="endTime">End Time</label>
+      <input id="endTime" type="time" pInputText formControlName="endTime" />
+    </div>
+    <div class="p-field">
+      <label for="room">Meeting Room</label>
+      <p-dropdown
+        id="room"
+        [options]="rooms"
+        formControlName="room"
+      ></p-dropdown>
+    </div>
+    <div class="p-d-flex p-jc-end">
+      <button
+        pButton
+        type="button"
+        label="Cancel"
+        icon="pi pi-times"
+        (click)="displayBookModal = false"
+      ></button>
+      <button
+        pButton
+        type="submit"
+        label="Book"
+        icon="pi pi-check"
+        class="p-ml-2"
+        [disabled]="bookMeetingForm.invalid"
+      ></button>
+    </div>
+  </form>
+</p-dialog>
+
+<p-dialog
+  header="Delete Meeting"
+  [(visible)]="displayDeleteModal"
+  [modal]="true"
+  [closable]="false"
+>
+  <p>Are you sure you want to delete this meeting?</p>
+  <div class="p-d-flex p-jc-end">
+    <button
+      pButton
+      type="button"
+      label="Cancel"
+      icon="pi pi-times"
+      (click)="displayDeleteModal = false"
+    ></button>
+    <button
+      pButton
+      type="button"
+      label="Delete"
+      icon="pi pi-check"
+      class="p-ml-2"
+      (click)="onDeleteMeeting()"
+    ></button>
+  </div>
+</p-dialog>

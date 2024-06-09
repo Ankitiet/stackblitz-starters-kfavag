@@ -1,0 +1,42 @@
+/* Center the login card in the middle of the screen */
+.p-d-flex {
+  height: 100vh;
+}
+
+.p-card {
+  width: 100%;
+  min-width: 400px;
+  margin: auto;
+  padding: 2rem;
+}
+
+.p-card-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.p-card-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.p-field {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.p-field label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+button[pButton] {
+  width: 100%;
+  margin-top: 1rem;
+}
+.login-details{
+  margin-top: 16px;
+}
+input{
+  width: 100%;
+}
